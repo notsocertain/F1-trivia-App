@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getQuizResults } from '../services/axios.service'; 
+import { useNavigate } from 'react-router-dom';
+import { getQuizResults,logout } from '../services/axios.service'; 
 import ProfilePic from '../assets/profile.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +12,7 @@ const Profile = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [selectedResultId, setSelectedResultId] = useState(null);
   const [selectedResultScore, setSelectedResultScore] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,6 +58,7 @@ const Profile = () => {
         console.error(error);
       }
     };
+    
 
     fetchData();
   }, []);
@@ -79,6 +81,24 @@ const Profile = () => {
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
+  const logoutFunction = async () => {
+    try {
+      // console.log('log out');
+      // Assuming this is an asynchronous logout function
+     const loggingout =await logout('logout');
+     if(loggingout){
+      navigate("/login"); 
+    }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  // useEffect(() => {
+    // Call your logout function here or perform any other logic
+  //   logoutFunction();
+  // }, []); // Empty dependency array means this effect runs once after the initial render
+
   
   const handleViewDetails = (id,score) => {
     console.log(id);
@@ -155,7 +175,11 @@ const Profile = () => {
                 </button>
               )}
             </div>
-        </div>
+            <button onClick={logoutFunction} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 block ml-auto m-4 mr-4">
+                  Log Out
+                </button>
+            
+      </div>
 
       {showDetails && (
               <DetailedResult

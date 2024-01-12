@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { signup,
-        login} = require('../controllers/signup')
+        login,
+        logout} = require('../controllers/signup')
 const { getQuestionByCategory,
         getCategories,
         storeResult} = require('../controllers/quizController')
@@ -15,7 +16,7 @@ const { getResults,
 // API ENDPOINTS
 router.post('/signup',signup);
 router.post('/login',login);
-router.post('/storeResult',storeResult);
+router.post('/storeResult',auth,storeResult);
 
 router.get('/categories/:category',auth,getQuestionByCategory);
 router.get('/categories',auth,getCategories);
@@ -24,6 +25,7 @@ router.get('/score/:id',auth,getScore)
 router.get('/profile',auth,getResults);
 router.get(`/results/:id`,auth,getDetailedResult);
 router.get('/auth',userAuth);
+router.get('/logout',auth,logout);
 
 
 module.exports= router;

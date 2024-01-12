@@ -68,9 +68,9 @@ const Question = ({ questions, currentQuestionIndex, handleNextQuestion }) => {
     </div>
   );
 };
-
-// Assuming CheckIcon is defined elsewhere
 export default Question;
+//  CheckIcon is defined here
+
 
 function CheckIcon(props) {
   return (

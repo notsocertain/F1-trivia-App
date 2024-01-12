@@ -31,7 +31,7 @@ const signup = async(req,res)=>{
         return res.status(201).json({ message: 'Account Created Successfully' });
         
     }catch(error){
-        res.status(500).send(error.message);
+        return res.status(500).json({ error: "Failed" });
         console.error(error);
     }
 }
@@ -71,14 +71,26 @@ const login = async(req,res)=>{
               
               return res.status(200).json({ message: 'Successfully Logged In', data: userWithoutPassword});
               
-              
         }
+        return res.status(401).json({ error: "Invalid Credentials" });
+       
         }
-        return res.status(404).send(`user email doesn't exist`)
+        return res.status(401).json({ error: "No User Found" });
     }catch(error){
         console.error(error);
         res.status(500).send(error.message)
     }
 } 
+const logout=async(req,res)=>{
+    try{
+        const token = req.cookies.jwtoken;
+        res.clearCookie('jwtoken');
+        res.status(200).json({message: 'Logged out successfully'});
 
-module.exports = {signup, login}
+    }catch(error){
+        console.error(error.message)
+        res.status(500).json({error:'Something went wrong'});
+    }
+}
+
+module.exports = {signup, login, logout}

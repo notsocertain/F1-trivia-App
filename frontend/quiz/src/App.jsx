@@ -1,6 +1,8 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoutes from './utils/PrivateRoutes'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from './components/Header';
 import Login from './pages/Login';
@@ -31,6 +33,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
+        <ToastContainer />
         <Footer />
       </div>
     </Router>

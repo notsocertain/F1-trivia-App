@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../assets/f1.png'; // Replace with actual path
+
+import { useNavigate } from 'react-router-dom';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getScore } from '../services/axios.service';
@@ -10,10 +11,7 @@ const Results = () => {
   const [score, setScore] = useState([]);
   const location = useLocation();
   const resultId = location.state?.resultId;
-  const totalQuestions = 10; // Replace with the total number of questions
-  const totalCorrectAnswers = 7; // Replace with the actual number
-
-  const percentageCorrect = (totalCorrectAnswers / totalQuestions) * 100;
+ const navigate = useNavigate();
 
 
   const fetchResult = async()=>{
