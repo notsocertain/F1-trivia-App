@@ -4,6 +4,8 @@ const mongoose = require('../db');
 const quizModel = require('../model/quiz');
 const resultModel = require('../model/result')
 
+//sending only 10 random questions each time
+
 const getQuestionByCategory = async(req,res)=>{
     const category = req.params.category
     console.log(category);
