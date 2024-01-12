@@ -20,7 +20,7 @@ router.post('/storeResult',storeResult);
 router.get('/categories/:category',auth,getQuestionByCategory);
 router.get('/categories',auth,getCategories);
 
-router.get('/results',auth,getScore)
+router.get('/score/:id',auth,getScore)
 router.get('/profile',auth,getResults);
 router.get(`/results/:id`,auth,getDetailedResult);
 router.get('/auth',userAuth);

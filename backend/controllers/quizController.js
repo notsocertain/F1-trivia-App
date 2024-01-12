@@ -8,14 +8,22 @@ const getQuestionByCategory = async(req,res)=>{
     const category = req.params.category
     console.log(category);
     try{
-        const quiz = await  quizModel.find({
-            category:category
-        })
-        if(!quiz){
+
+        const quizzes = await quizModel.find({ category: category });
+
+    // Shuffle the array of quizzes using the Fisher-Yates algorithm
+    for (let i = quizzes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [quizzes[i], quizzes[j]] = [quizzes[j], quizzes[i]];
+    }
+
+    // Retrieve only the desired number of random quizzes
+    const randomQuizzes = quizzes.slice(0, 10);
+        if(!quizzes){
             return res.status(404).send({ message: 'No Quizes found' });
         }
 
-        return res.status(200).json({ data: quiz });
+        return res.status(200).json({ data: randomQuizzes });
     }catch(error){
         console.error(error);
         return res.status(500).send(error.message);
@@ -59,4 +67,8 @@ const storeResult = async(req,res)=>{
     }
 }
 
-module.exports= {getQuestionByCategory,getCategories,storeResult}
+
+module.exports= {getQuestionByCategory,
+                getCategories,
+                storeResult,
+                 }

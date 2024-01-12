@@ -25,7 +25,7 @@ const getScore = async(req,res)=>{
     const id = req.params.id;
     try{
        score = await resultModel.findOne({_id:id})
-       res.status(200).send(results);
+       return res.status(201).json({ message: 'Score Retrieved Successfully', data:score });
     }catch(error){
         res.status(500).send(e.message)
         console.error(e);

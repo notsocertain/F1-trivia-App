@@ -107,3 +107,16 @@ export const postSignup = async (url, data) => {
         console.error(error)
     }
   }
+
+  export const getScore = async(url,data)=>{
+    try{
+        const response = await axios.get(
+            `http://localhost:8000/api/${url}`,
+            data
+        );
+        console.log(response.data)
+        return response.data;
+    }catch(error){
+        console.error(error)
+    }
+  }
