@@ -54,13 +54,14 @@ const storeResult = async(req,res)=>{
     const questions = req.body.questions;
     category = req.body.category;
     answer = questions.answer;
-    console.log(answer);
+    // console.log(answer);
     // console.log(req.body.category);
     const token = req.cookies.jwtoken;
     try{
         const decodedToken = jwt.verify(token,process.env.SECRETKEY);
         console.log(decodedToken.email);
-        const info ={...result,email:decodedToken.email,userAnswer:answer}
+        const info ={...result,email:decodedToken.email}
+        console.log(info);
         const newResult = await resultModel.create(info)
         return res.status(201).json({ message: 'Result Stored Successfully', data:newResult });
 

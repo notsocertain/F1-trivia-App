@@ -28,26 +28,37 @@ const Quiz = () => {
   const navigate = useNavigate();
 
   const handleNextQuestion = (answer, question, correctAnswer) => {
+    console.log('called');
+    console.log(question);
+    console.log(answer);
     setResponses((prevResponses) => [
       ...prevResponses,
       { question, answer, correctAnswer },
-    ]);
-
+      
+    ]  );
+ 
+ 
     setCurrentQuestionIndex((current) => {
+      console.log(filteredQuestions.length);
       const nextIndex = (current + 1) % filteredQuestions.length;
+      console.log(nextIndex);
       if (nextIndex === 0) {
+
         setFinalResponses([...responses, { question, answer, correctAnswer }]);
-        
       }
       return nextIndex;
     });
   };
   const data = finalResponses;
+  // console.log(data);
 
   useEffect(() => {
     const sendResult = async () => {
+      console.log('sentResult is being called');
       try {
+         console.log(data);
       const  response = await storeResult("storeResult", { questions:data, category });
+      console.log(response);
         if(response.message=="Result Stored Successfully"){
           const id = response.data._id;
             console.log(response.data._id);
@@ -62,7 +73,7 @@ const Quiz = () => {
     if (finalResponses.length > 0) {
       sendResult(); // Send result only when finalResponses has data
     }
-  }, [data]);
+  }, [data,category]);
   
 
   return (

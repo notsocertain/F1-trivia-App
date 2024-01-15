@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import ErrorPage from './pages/ErrorPage';
 import Categories from './pages/Categories';
 import Results from './pages/Results';
-import Quiz from './pages/Quiz';
+import Quizz from './pages/Quiz';
 import Profile from './pages/Profile'
 import Home from './pages/Home'
 
@@ -28,7 +28,7 @@ function App() {
           {/* Protect specific routes using a specific path */}
           <Route element={<PrivateRoutes />} path="">
             <Route path="/categories" element={<Categories />} />
-            <Route path="/categories/:category" element={<Quiz />} />
+            <Route path="/categories/:category" element={<Quizz />} />
             <Route path="/results" element={<Results />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

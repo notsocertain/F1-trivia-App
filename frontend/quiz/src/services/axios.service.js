@@ -105,6 +105,7 @@ export const postSignup = async (url, data) => {
 
   export const storeResult = async(url,data)=>{
     try{
+      console.log(data);
         const response = await axios.post(
             `http://localhost:8000/api/${url}`,
             data
